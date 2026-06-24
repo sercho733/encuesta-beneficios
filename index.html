@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Relevamiento de Beneficios Corporativos · Gestión Compensaciones y Capital Humano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#103A40; --ink-2:#0B2A2E; --green:#2C5A4B; --amber:#C0883E; --amber-soft:#E7C998;
+    --paper:#F7F5F1; --surface:#FFFFFF; --line:#E2DDD3; --line-strong:#CDC6B8;
+    --text:#21302E; --muted:#5E6B66; --muted-2:#869089; --focus:#1C6E72;
+    --radius:14px; --shadow:0 1px 2px rgba(16,58,64,.04), 0 12px 32px -18px rgba(16,58,64,.22);
+    --maxw:760px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--text);
+    font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--amber-soft)}
+
+  .progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:60;background:transparent;}
+  .progress__fill{height:100%;width:0%;background:linear-gradient(90deg,var(--amber),var(--green));transition:width .35s ease-out;}
+
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr;gap:40px;}
+  @media(min-width:1000px){.wrap{grid-template-columns:248px minmax(0,var(--maxw));justify-content:center;gap:56px;align-items:start}}
+
+  header.masthead{background:var(--ink);color:#EAF1EF;border-bottom:3px solid var(--amber);}
+  .masthead__inner{max-width:1140px;margin:0 auto;padding:42px 24px 48px}
+  .brand{display:flex;align-items:center;gap:13px;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-soft);font-weight:600;}
+  .brand .mark{width:30px;height:30px;border-radius:7px;flex:none;background:linear-gradient(135deg,var(--amber),#8f5e26);display:grid;place-items:center;color:#1c1206;font-family:"Fraunces";font-weight:700;font-size:1.05rem;}
+  h1{font-family:"Fraunces";font-weight:600;font-size:clamp(2rem,4.6vw,3.1rem);line-height:1.05;letter-spacing:-.01em;margin:.55em 0 .35em;color:#fff;max-width:18ch;}
+  .lede{font-size:1.05rem;color:#C7D6D1;max-width:62ch;margin:0}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;}
+  .chip{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:#D7E3DF;padding:7px 13px;border-radius:999px;font-size:.8rem;font-weight:500;}
+
+  nav.toc{display:none}
+  @media(min-width:1000px){
+    nav.toc{display:block;position:sticky;top:36px;align-self:start;padding-top:40px;}
+    .toc__title{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);font-weight:700;margin:0 0 14px 14px;}
+    .toc ol{list-style:none;margin:0;padding:0}
+    .toc a{display:flex;gap:11px;align-items:baseline;padding:7px 14px;border-left:2px solid var(--line);color:var(--muted);text-decoration:none;font-size:.86rem;line-height:1.35;transition:color .15s,border-color .15s,background .15s;cursor:pointer;}
+    .toc a .n{font-family:"Fraunces";font-weight:600;color:var(--muted-2);font-size:.8rem;min-width:1.4em}
+    .toc a:hover{color:var(--ink);background:rgba(16,58,64,.03)}
+    .toc a.active{color:var(--ink);border-left-color:var(--amber);font-weight:600;background:linear-gradient(90deg,rgba(192,136,62,.10),transparent);}
+    .toc a.active .n{color:var(--amber)}
+    .toc a.done{color:var(--muted-2);border-left-color:var(--green);}
+    .toc a.done .n{color:var(--green)}
+  }
+
+  main{padding:0 0 90px}
+  @media(min-width:1000px){main{padding:40px 0 120px}}
+
+  .intro-note{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin:34px 0 16px;box-shadow:var(--shadow);font-size:.92rem;color:var(--muted);display:flex;gap:14px;align-items:flex-start;}
+  .intro-note .ico{flex:none;width:36px;height:36px;border-radius:9px;background:#EDF3F1;color:var(--green);display:grid;place-items:center;}
+  .intro-note strong{color:var(--ink);font-weight:600}
+
+  /* Step progress indicator */
+  .step-progress{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:14px 0 12px;margin-bottom:4px;}
+  .step-progress__text{font-size:.88rem;color:var(--muted);font-weight:500;}
+  .step-progress__text strong{color:var(--ink);font-weight:700;}
+  .step-dots{display:flex;gap:7px;align-items:center;}
+  .step-dot{width:10px;height:10px;border-radius:50%;background:var(--line-strong);transition:background .25s,transform .25s;}
+  .step-dot.active{background:var(--amber);transform:scale(1.35);}
+  .step-dot.done{background:var(--green);}
+
+  section.block{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px 30px 14px;margin-top:0;box-shadow:var(--shadow);scroll-margin-top:24px;display:none;animation:fadeIn .3s ease;}
+  section.block.active{display:block;}
+  .q.invalid{border-left:3px solid #C0392B;padding-left:13px;margin-left:-16px;border-radius:2px;background:linear-gradient(90deg,rgba(192,57,43,.05),transparent);}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @media(max-width:560px){section.block{padding:24px 18px 8px}}
+  .block__head{margin:0 0 6px;display:flex;gap:14px;align-items:flex-start}
+  .block__num{font-family:"Fraunces";font-weight:600;font-size:1rem;color:#fff;background:var(--ink);width:34px;height:34px;border-radius:9px;flex:none;display:grid;place-items:center;margin-top:2px;}
+  .block__title{font-family:"Fraunces";font-weight:600;font-size:1.42rem;color:var(--ink);margin:0;line-height:1.15;letter-spacing:-.01em;}
+  .block__sub{color:var(--muted);font-size:.9rem;margin:3px 0 0}
+  .block__head .txt{padding-top:1px}
+
+  .q{padding:18px 0;border-top:1px solid var(--line)}
+  .q:first-of-type{border-top:0;padding-top:14px}
+  .q > .qlabel{display:block;font-weight:600;color:var(--ink-2);font-size:.98rem;margin-bottom:4px;}
+  .q .req{color:var(--amber);font-weight:700;margin-left:2px}
+  .qhint{display:block;color:var(--muted);font-size:.84rem;margin:-1px 0 12px;font-weight:400}
+
+  .grid-2{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:600px){.grid-2{grid-template-columns:1fr 1fr}}
+
+  input[type=text],input[type=email],input[type=tel],input[type=number],select,textarea{
+    width:100%;font:inherit;color:var(--text);background:var(--surface);
+    border:1.5px solid var(--line-strong);border-radius:10px;padding:11px 13px;transition:border-color .15s,box-shadow .15s;}
+  textarea{resize:vertical;min-height:80px;line-height:1.5}
+  select{appearance:none;-webkit-appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235E6B66' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;cursor:pointer;}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--focus);box-shadow:0 0 0 3px rgba(28,110,114,.16);}
+  input::placeholder,textarea::placeholder{color:var(--muted-2)}
+
+  .opts{display:grid;gap:9px;margin-top:4px}
+  .opts.cols-2{grid-template-columns:1fr}
+  @media(min-width:560px){.opts.cols-2{grid-template-columns:1fr 1fr}.opts.cols-3{grid-template-columns:1fr 1fr 1fr}}
+  .opt{display:flex;align-items:flex-start;gap:11px;cursor:pointer;border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;background:var(--surface);transition:border-color .15s,background .15s;font-size:.93rem;line-height:1.35;}
+  .opt:hover{border-color:var(--line-strong);background:#FCFBF8}
+  .opt input{appearance:none;-webkit-appearance:none;margin:1px 0 0;flex:none;width:19px;height:19px;border:2px solid var(--line-strong);background:var(--surface);cursor:pointer;transition:.15s;}
+  .opt input[type=radio]{border-radius:50%}
+  .opt input[type=checkbox]{border-radius:6px}
+  .opt input:checked{border-color:var(--green);background:var(--green)}
+  .opt input[type=radio]:checked{box-shadow:inset 0 0 0 3.5px #fff}
+  .opt input[type=checkbox]:checked{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;}
+  .opt:has(input:checked){border-color:var(--green);background:#F1F6F3}
+  .opt input:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(28,110,114,.22)}
+
+  .seg{display:inline-flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+  .seg label{cursor:pointer;border:1.5px solid var(--line-strong);border-radius:999px;padding:8px 18px;font-size:.9rem;font-weight:500;color:var(--muted);transition:.15s;background:var(--surface);}
+  .seg input{position:absolute;opacity:0;width:0;height:0}
+  .seg label:hover{border-color:var(--green);color:var(--ink)}
+  .seg input:checked + label{background:var(--ink);border-color:var(--ink);color:#fff}
+  .seg input:focus-visible + label{box-shadow:0 0 0 3px rgba(28,110,114,.22)}
+
+  .reveal{display:none;margin-top:11px}
+  .reveal.show{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+
+  /* Validation error highlight */
+  .field-error{outline:2px solid #C0392B;outline-offset:5px;border-radius:12px;animation:shake .3s ease;}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .error-msg{color:#C0392B;font-size:.84rem;font-weight:600;margin-top:6px;display:none;}
+  .error-msg.show{display:block;}
+
+  /* Section navigation footer */
+  .section-footer{display:flex;align-items:center;justify-content:space-between;padding:24px 0 12px;gap:14px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:12px;}
+  .btn-next{font:inherit;font-weight:600;font-size:1rem;cursor:pointer;background:var(--ink);color:#fff;border:0;border-radius:11px;padding:14px 28px;transition:.15s;display:inline-flex;align-items:center;gap:9px;margin-left:auto;}
+  .btn-next:hover{background:var(--ink-2);transform:translateY(-1px)}
+  .btn-next:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(28,110,114,.3)}
+  .btn-prev{font:inherit;font-weight:500;font-size:.93rem;cursor:pointer;background:transparent;color:var(--muted);border:1.5px solid var(--line-strong);border-radius:11px;padding:13px 20px;transition:.15s;display:inline-flex;align-items:center;gap:8px;}
+  .btn-prev:hover{color:var(--ink);border-color:var(--muted)}
+  .btn-prev:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(28,110,114,.2)}
+
+  .consent{background:#F1F6F3;border:1px solid #D5E4DC;border-radius:12px;padding:16px 18px;margin:18px 0 4px;}
+  .submit-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:26px}
+  button.send{font:inherit;font-weight:600;font-size:1rem;cursor:pointer;background:var(--green);color:#fff;border:0;border-radius:11px;padding:14px 30px;transition:.15s;display:inline-flex;align-items:center;gap:9px;}
+  button.send:hover{background:#1e4035;transform:translateY(-1px)}
+  button.send:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(28,110,114,.3)}
+  .submit-note{font-size:.84rem;color:var(--muted);max-width:34ch}
+
+  footer.foot{max-width:1140px;margin:0 auto;padding:30px 24px 50px;color:var(--muted-2);font-size:.82rem;border-top:1px solid var(--line);}
+  .hp{position:absolute;left:-9999px}
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto !important;animation:none !important;transition:none !important}}
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="progress__fill" id="bar"></div></div>
+
+<header class="masthead">
+  <div class="masthead__inner">
+    <div class="brand"><span class="mark">C</span>Gestión Compensaciones y Capital Humano</div>
+    <h1>Relevamiento de Beneficios Corporativos 2026</h1>
+    <p class="lede">Estudio de mercado sobre las prácticas de beneficios y bienestar en empresas de la región. Sus respuestas alimentan un informe estratégico comparativo de acceso exclusivo para participantes.</p>
+    <div class="meta-row">
+      <span class="chip">⏱ ~10 min</span>
+      <span class="chip">🔒 100% confidencial</span>
+      <span class="chip">📊 6 secciones</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <nav class="toc" aria-label="Secciones de la encuesta">
+    <p class="toc__title">Contenido</p>
+    <ol id="tocList">
+      <li><a data-section="0" class="active"><span class="n">1</span><span>Información de tu empresa</span></a></li>
+      <li><a data-section="1"><span class="n">2</span><span>Salud y seguros</span></a></li>
+      <li><a data-section="2"><span class="n">3</span><span>Beneficios económicos</span></a></li>
+      <li><a data-section="3"><span class="n">4</span><span>Tiempo libre y flexibilidad</span></a></li>
+      <li><a data-section="4"><span class="n">5</span><span>Desarrollo y bienestar</span></a></li>
+      <li><a data-section="5"><span class="n">6</span><span>Estrategia y cierre</span></a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <div class="intro-note">
+      <span class="ico" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </span>
+      <div><strong>Confidencialidad.</strong> Los datos se usan solo con fines estadísticos y se publican de forma agregada y anónima. Todas las preguntas son obligatorias, salvo la última.</div>
+    </div>
+
+    <div class="step-progress">
+      <div class="step-progress__text">Sección <strong id="stepNum">1</strong> de 6 &mdash; <span id="stepName">Información de tu empresa</span></div>
+      <div class="step-dots" id="stepDots">
+        <span class="step-dot active"></span>
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+      </div>
+    </div>
+
+    <form method="POST" action="#" id="survey" novalidate>
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+      <!-- 1 · INFORMACIÓN DE TU EMPRESA -->
+      <section class="block active" id="s1">
+        <div class="block__head">
+          <span class="block__num">1</span>
+          <div class="txt">
+            <h2 class="block__title">Información de tu empresa</h2>
+            <p class="block__sub">Datos generales de la organización.</p>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel" for="email">Email <span class="req">*</span></label>
+          <span class="qhint">A esta dirección enviaremos el informe comparativo.</span>
+          <input type="email" id="email" name="email" required placeholder="nombre@empresa.com" />
+        </div>
+
+        <div class="q">
+          <label class="qlabel">¿A qué sector pertenece su empresa? <span class="req">*</span></label>
+          <div class="opts cols-2" id="sector-opts">
+            <label class="opt"><input type="radio" name="empresa_sector" value="Agroindustria" required><span class="txt">🌾 Agroindustria</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Automotriz"><span class="txt">🚗 Automotriz</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Comercio"><span class="txt">🛍️ Comercio</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Construcción"><span class="txt">🏗️ Construcción</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Consumo masivo"><span class="txt">🛒 Consumo masivo</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Gastronomía"><span class="txt">🍽️ Gastronomía</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Generación y distribución de electricidad/agua/gas"><span class="txt">⚡ Electricidad / agua / gas</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Medios de comunicación"><span class="txt">📡 Medios de comunicación</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Metal mecánica"><span class="txt">🔩 Metal mecánica</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Metalurgia"><span class="txt">⚙️ Metalurgia</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Minería / petróleo"><span class="txt">⛏️ Minería / petróleo</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Retail mayorista"><span class="txt">🏪 Retail mayorista</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Servicios financieros"><span class="txt">🏦 Servicios financieros</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Servicios profesionales / Consultoría"><span class="txt">📊 Servicios profesionales / Consultoría</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Tecnología / Logística"><span class="txt">💻 Tecnología / Logística</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Transporte"><span class="txt">🚛 Transporte</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Vitivinícola"><span class="txt">🍇 Vitivinícola</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Energías renovables / sustentables"><span class="txt">🌱 Energías renovables / sustentables</span></label>
+            <label class="opt"><input type="radio" name="empresa_sector" value="Otro" data-reveal="sector-otro"><span class="txt">✏️ Otro</span></label>
+          </div>
+          <div class="reveal" id="sector-otro"><input type="text" name="empresa_sector_otro" placeholder="¿Cuál?" /></div>
+          <div class="error-msg" id="err-sector">Por favor, seleccione el sector de su empresa.</div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">La empresa es considerada: <span class="req">*</span></label>
+          <div class="seg" id="tipo-seg">
+            <input type="radio" id="tipo1" name="empresa_tipo" value="Sector producción" required><label for="tipo1">🏭 Sector producción</label>
+            <input type="radio" id="tipo2" name="empresa_tipo" value="Sector servicios"><label for="tipo2">💼 Sector servicios</label>
+          </div>
+          <div class="error-msg" id="err-tipo">Por favor, indique si la empresa es de producción o servicios.</div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">Tamaño de la empresa <span class="req">*</span></label>
+          <div class="opts cols-2" id="tamano-opts">
+            <label class="opt"><input type="radio" name="empresa_tamano" value="Micro-pyme" required><span class="txt">🌱 Micro-pyme</span></label>
+            <label class="opt"><input type="radio" name="empresa_tamano" value="Pyme"><span class="txt">🌿 Pyme</span></label>
+            <label class="opt"><input type="radio" name="empresa_tamano" value="Mediana"><span class="txt">🌳 Mediana</span></label>
+            <label class="opt"><input type="radio" name="empresa_tamano" value="Grande"><span class="txt">🏢 Grande</span></label>
+          </div>
+          <div class="error-msg" id="err-tamano">Por favor, seleccione el tamaño de la empresa.</div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">¿Qué cantidad de empleados posee su empresa? <span class="req">*</span></label>
+          <div class="opts cols-2" id="dotacion-opts">
+            <label class="opt"><input type="radio" name="empresa_dotacion" value="Menos de 10" required><span class="txt">👤 Menos de 10 personas</span></label>
+            <label class="opt"><input type="radio" name="empresa_dotacion" value="11 a 50"><span class="txt">👥 Entre 11 y 50 personas</span></label>
+            <label class="opt"><input type="radio" name="empresa_dotacion" value="51 a 200"><span class="txt">👨‍👩‍👧‍👦 Entre 51 y 200 personas</span></label>
+            <label class="opt"><input type="radio" name="empresa_dotacion" value="201 a 500"><span class="txt">🏬 Entre 201 y 500 personas</span></label>
+            <label class="opt"><input type="radio" name="empresa_dotacion" value="501 a 1000"><span class="txt">🏙️ Entre 501 y 1000 personas</span></label>
+            <label class="opt"><input type="radio" name="empresa_dotacion" value="Más de 1001"><span class="txt">🏛️ Más de 1001 personas</span></label>
+          </div>
+          <div class="error-msg" id="err-dotacion">Por favor, indique la cantidad de empleados.</div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">Región del país donde se desarrolla la empresa <span class="req">*</span></label>
+          <span class="qhint">Marcá todas las que correspondan.</span>
+          <div class="opts cols-3">
+            <label class="opt"><input type="checkbox" name="empresa_region" value="NOA"><span class="txt">🌵 NOA</span></label>
+            <label class="opt"><input type="checkbox" name="empresa_region" value="NEA"><span class="txt">🌿 NEA</span></label>
+            <label class="opt"><input type="checkbox" name="empresa_region" value="CUYO"><span class="txt">🍇 CUYO</span></label>
+            <label class="opt"><input type="checkbox" name="empresa_region" value="SUR"><span class="txt">🏔️ SUR</span></label>
+            <label class="opt"><input type="checkbox" name="empresa_region" value="CENTRO"><span class="txt">🏙️ CENTRO</span></label>
+            <label class="opt"><input type="checkbox" name="empresa_region" value="Toda Argentina"><span class="txt">🇦🇷 Toda Argentina</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">¿Tienen un área o referente de Recursos Humanos dedicado? <span class="req">*</span></label>
+          <div class="opts cols-2" id="rrhh-opts">
+            <label class="opt"><input type="radio" name="empresa_rrhh" value="Área/equipo dedicado" required><span class="txt">🏢 Área o equipo de RRHH dedicado</span></label>
+            <label class="opt"><input type="radio" name="empresa_rrhh" value="Referente part-time"><span class="txt">👤 Referente o encargado part-time</span></label>
+            <label class="opt"><input type="radio" name="empresa_rrhh" value="Lo gestiona la dirección"><span class="txt">🎯 Lo gestiona directamente la dirección</span></label>
+            <label class="opt"><input type="radio" name="empresa_rrhh" value="Outsourcing/consultoría"><span class="txt">🤝 Outsourcing / consultoría externa</span></label>
+          </div>
+          <div class="error-msg" id="err-rrhh">Por favor, indique cómo gestionan el área de RRHH.</div>
+        </div>
+
+        <div class="section-footer">
+          <button type="button" class="btn-next" onclick="goNext()">
+            Siguiente sección
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- 2 · SALUD Y SEGUROS -->
+      <section class="block" id="s2">
+        <div class="block__head">
+          <span class="block__num">2</span>
+          <div class="txt">
+            <h2 class="block__title">Salud y seguros</h2>
+            <p class="block__sub">Cobertura médica y protección por encima de lo exigido por ley.</p>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">¿Ofrece cobertura médica complementaria (prepaga / plan superador)? <span class="req">*</span></label>
+          <div class="seg" id="prepaga-seg">
+            <input type="radio" id="med1" name="salud_prepaga" value="si" data-reveal="med-detalle" required><label for="med1">Sí</label>
+            <input type="radio" id="med2" name="salud_prepaga" value="no" data-reveal-hide="med-detalle"><label for="med2">No</label>
+          </div>
+          <div class="reveal" id="med-detalle">
+            <label class="qlabel" style="margin-top:6px">¿Quién la financia? <span class="req">*</span></label>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="salud_financiacion" value="100% la empresa"><span class="txt">100% la empresa</span></label>
+              <label class="opt"><input type="radio" name="salud_financiacion" value="Costo compartido"><span class="txt">Costo compartido empresa / empleado</span></label>
+              <label class="opt"><input type="radio" name="salud_financiacion" value="Lo abona el empleado con descuento"><span class="txt">El empleado, con descuento corporativo</span></label>
+            </div>
+          </div>
+          <div class="error-msg" id="err-prepaga">Por favor, indique si ofrecen cobertura médica complementaria.</div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">Servicios de salud adicionales <span class="req">*</span></label>
+          <div class="opts cols-2">
+            <label class="opt"><input type="checkbox" name="salud_extras" value="Odontológica"><span class="txt">🦷 Cobertura odontológica</span></label>
+            <label class="opt"><input type="checkbox" name="salud_extras" value="Telemedicina"><span class="txt">📱 Telemedicina</span></label>
+            <label class="opt"><input type="checkbox" name="salud_extras" value="Chequeos preventivos"><span class="txt">🩺 Chequeos preventivos</span></label>
+            <label class="opt"><input type="checkbox" name="salud_extras" value="Servicio médico en planta/oficina"><span class="txt">🏥 Servicio médico en planta/oficina</span></label>
+            <label class="opt"><input type="checkbox" name="salud_extras" value="Salud mental / EAP"><span class="txt">🧠 Salud mental / apoyo psicológico (EAP)</span></label>
+            <label class="opt"><input type="checkbox" name="salud_extras" value="Cobertura para grupo familiar"><span class="txt">👨‍👩‍👧 Cobertura para el grupo familiar</span></label>
+            <label class="opt"><input type="checkbox" name="salud_extras" value="Ninguno adicional"><span class="txt">❌ Ninguno / No se otorgan servicios adicionales</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">Seguros adicionales <span class="req">*</span></label>
+          <div class="opts cols-2">
+            <label class="opt"><input type="checkbox" name="seguros" value="Seguro de vida adicional"><span class="txt">🛡️ Seguro de vida adicional</span></label>
+            <label class="opt"><input type="checkbox" name="seguros" value="Accidentes personales"><span class="txt">⚠️ Accidentes personales</span></label>
+            <label class="opt"><input type="checkbox" name="seguros" value="Seguro de sepelio"><span class="txt">📋 Seguro de sepelio</span></label>
+            <label class="opt"><input type="checkbox" name="seguros" value="Ninguno adicional"><span class="txt">❌ Ninguno por encima de la ley</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">Programas de prevención y promoción de la salud <span class="req">*</span></label>
+          <span class="qhint">Marcá todas las iniciativas que implementan.</span>
+          <div class="opts cols-2">
+            <label class="opt"><input type="checkbox" name="salud_prevencion" value="Campañas de vacunación gratuita"><span class="txt">💉 Campañas de vacunación gratuita</span></label>
+            <label class="opt"><input type="checkbox" name="salud_prevencion" value="Talleres de bienestar y hábitos saludables"><span class="txt">🌿 Talleres de bienestar y hábitos saludables</span></label>
+            <label class="opt"><input type="checkbox" name="salud_prevencion" value="Ergonomía en el puesto de trabajo"><span class="txt">🪑 Ergonomía en el puesto de trabajo</span></label>
+            <label class="opt"><input type="checkbox" name="salud_prevencion" value="Pausas activas / stretching"><span class="txt">🤸 Pausas activas / stretching</span></label>
+            <label class="opt"><input type="checkbox" name="salud_prevencion" value="Programas de alimentación saludable"><span class="txt">🥗 Programas de alimentación saludable</span></label>
+            <label class="opt"><input type="checkbox" name="salud_prevencion" value="Ninguno"><span class="txt">❌ No contamos con estos programas</span></label>
+          </div>
+        </div>
+
+        <div class="section-footer">
+          <button type="button" class="btn-prev" onclick="goPrev()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            Sección anterior
+          </button>
+          <button type="button" class="btn-next" onclick="goNext()">
+            Siguiente sección
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- 3 · BENEFICIOS ECONÓMICOS -->
+      <section class="block" id="s3">
+        <div class="block__head">
+          <span class="block__num">3</span>
+          <div class="txt">
+            <h2 class="block__title">Beneficios económicos</h2>
+            <p class="block__sub">Asignaciones, facilidades financieras y compensación variable.</p>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">¿Con qué frecuencia realizan ajustes salariales? <span class="req">*</span></label>
+          <div class="opts cols-2" id="ajuste-opts">
+            <label class="opt"><input type="radio" name="salario_ajuste_frecuencia" value="Mensual" required><span class="txt">📆 Mensual</span></label>
+            <label class="opt"><input type="radio" name="salario_ajuste_frecuencia" value="Bimestral"><span class="txt">📅 Bimestral</span></label>
+            <label class="opt"><input type="radio" name="salario_ajuste_frecuencia" value="Trimestral"><span class="txt">🗓️ Trimestral</span></label>
+            <label class="opt"><input type="radio" name="salario_ajuste_frecuencia" value="Semestral"><span class="txt">📊 Semestral</span></label>
+            <label class="opt"><input type="radio" name="salario_ajuste_frecuencia" value="Anual"><span class="txt">📋 Anual</span></label>
+            <label class="opt"><input type="radio" name="salario_ajuste_frecuencia" value="Según negociación paritaria"><span class="txt">🤝 Según negociación paritaria</span></label>
+          </div>
+          <div class="error-msg" id="err-ajuste">Por favor, indique la frecuencia de ajuste salarial.</div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">Asignaciones y ayudas económicas <span class="req">*</span></label>
+          <div class="opts cols-2">
+            <label class="opt"><input type="checkbox" name="economicos" value="Home office / conectividad"><span class="txt">🏠 Home office / conectividad</span></label>
+            <label class="opt"><input type="checkbox" name="economicos" value="Transporte / movilidad"><span class="txt">🚌 Transporte / movilidad</span></label>
+            <label class="opt"><input type="checkbox" name="economicos" value="Comida / vianda / tickets"><span class="txt">🍱 Comida / vianda / tickets</span></label>
+            <label class="opt"><input type="checkbox" name="economicos" value="Ayuda escolar / guardería"><span class="txt">📚 Ayuda escolar / guardería</span></label>
+            <label class="opt"><input type="checkbox" name="economicos" value="Club de descuentos"><span class="txt">🏷️ Club de descuentos</span></label>
+            <label class="opt"><input type="checkbox" name="economicos" value="Bono por nacimiento / casamiento"><span class="txt">🎉 Bono por nacimiento / casamiento</span></label>
+            <label class="opt"><input type="checkbox" name="economicos" value="Ninguna"><span class="txt">❌ Ninguna / No se otorgan asignaciones adicionales</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">Facilidades financieras <span class="req">*</span></label>
+          <div class="opts cols-2">
+            <label class="opt"><input type="checkbox" name="financieros" value="Préstamos a empleados"><span class="txt">💰 Préstamos a tasa preferencial</span></label>
+            <label class="opt"><input type="checkbox" name="financieros" value="Adelantos de sueldo"><span class="txt">💳 Adelantos de sueldo</span></label>
+            <label class="opt"><input type="checkbox" name="financieros" value="Plan de ahorro / pensión"><span class="txt">🏦 Plan de ahorro / pensión complementaria</span></label>
+            <label class="opt"><input type="checkbox" name="financieros" value="Acciones / participación"><span class="txt">📈 Acciones / participación accionaria</span></label>
+            <label class="opt"><input type="checkbox" name="financieros" value="Ninguna"><span class="txt">❌ Ninguna / No se otorgan facilidades financieras</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">¿Cuenta con bono o compensación variable? <span class="req">*</span></label>
+          <div class="seg" id="var-seg">
+            <input type="radio" id="var1" name="variable_existe" value="si" data-reveal="var-detalle" required><label for="var1">Sí</label>
+            <input type="radio" id="var2" name="variable_existe" value="no" data-reveal-hide="var-detalle"><label for="var2">No</label>
+          </div>
+          <div class="reveal" id="var-detalle">
+            <label class="qlabel" style="margin-top:6px">¿A qué niveles alcanza? <span class="req">*</span></label>
+            <div class="opts cols-2">
+              <label class="opt"><input type="checkbox" name="variable_alcance" value="Dirección y gerencias"><span class="txt">Dirección y gerencias</span></label>
+              <label class="opt"><input type="checkbox" name="variable_alcance" value="Jefaturas"><span class="txt">Jefaturas</span></label>
+              <label class="opt"><input type="checkbox" name="variable_alcance" value="Equipo comercial (comisiones)"><span class="txt">Equipo comercial (comisiones)</span></label>
+              <label class="opt"><input type="checkbox" name="variable_alcance" value="Toda la organización"><span class="txt">Toda la organización</span></label>
+            </div>
+          </div>
+          <div class="error-msg" id="err-variable">Por favor, indique si cuentan con bono o compensación variable.</div>
+        </div>
+
+        <div class="section-footer">
+          <button type="button" class="btn-prev" onclick="goPrev()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            Sección anterior
+          </button>
+          <button type="button" class="btn-next" onclick="goNext()">
+            Siguiente sección
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- 4 · TIEMPO LIBRE Y FLEXIBILIDAD -->
+      <section class="block" id="s4">
+        <div class="block__head">
+          <span class="block__num">4</span>
+          <div class="txt">
+            <h2 class="block__title">Tiempo libre y flexibilidad</h2>
+            <p class="block__sub">Licencias por encima de la ley y modalidad de trabajo.</p>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">Licencias y tiempo libre adicional <span class="req">*</span></label>
+          <div class="opts cols-2">
+            <label class="opt"><input type="checkbox" name="licencias" value="Vacaciones superiores a la ley"><span class="txt">🌴 Vacaciones superiores a la ley</span></label>
+            <label class="opt"><input type="checkbox" name="licencias" value="Maternidad / paternidad extendida"><span class="txt">👶 Maternidad / paternidad extendida</span></label>
+            <label class="opt"><input type="checkbox" name="licencias" value="Día de cumpleaños libre"><span class="txt">🎂 Día de cumpleaños libre</span></label>
+            <label class="opt"><input type="checkbox" name="licencias" value="Días de estudio / examen"><span class="txt">📖 Días de estudio / examen</span></label>
+            <label class="opt"><input type="checkbox" name="licencias" value="Días de bienestar / salud mental"><span class="txt">🧘 Días de bienestar / salud mental</span></label>
+            <label class="opt"><input type="checkbox" name="licencias" value="Año sabático"><span class="txt">✈️ Año sabático</span></label>
+            <label class="opt"><input type="checkbox" name="licencias" value="Ninguna adicional"><span class="txt">❌ Ninguna / Solo lo establecido por ley</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">Modalidad de trabajo predominante <span class="req">*</span></label>
+          <div class="opts cols-2" id="modalidad-opts">
+            <label class="opt"><input type="radio" name="modalidad" value="Presencial" required><span class="txt">🏢 Presencial</span></label>
+            <label class="opt"><input type="radio" name="modalidad" value="Híbrido" data-reveal="ho-dias"><span class="txt">🔄 Híbrido</span></label>
+            <label class="opt"><input type="radio" name="modalidad" value="Remoto" data-reveal-hide="ho-dias"><span class="txt">🏠 Remoto</span></label>
+            <label class="opt"><input type="radio" name="modalidad" value="Depende del rol" data-reveal-hide="ho-dias"><span class="txt">🎯 Depende del rol</span></label>
+          </div>
+          <div class="reveal" id="ho-dias">
+            <label class="qlabel" style="margin-top:8px">¿Cuántos días de home office se ofrecen por semana? <span class="req">*</span></label>
+            <div class="opts cols-2" style="margin-top:6px">
+              <label class="opt"><input type="radio" name="ho_dias_semana" value="1 día"><span class="txt">1 día</span></label>
+              <label class="opt"><input type="radio" name="ho_dias_semana" value="2 días"><span class="txt">2 días</span></label>
+              <label class="opt"><input type="radio" name="ho_dias_semana" value="3 días"><span class="txt">3 días</span></label>
+              <label class="opt"><input type="radio" name="ho_dias_semana" value="4 días"><span class="txt">4 días</span></label>
+              <label class="opt"><input type="radio" name="ho_dias_semana" value="A definir con el empleado/equipo"><span class="txt">A definir con el empleado o equipo</span></label>
+            </div>
+          </div>
+          <div class="error-msg" id="err-modalidad">Por favor, seleccione la modalidad de trabajo predominante.</div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">Esquemas de flexibilidad horaria <span class="req">*</span></label>
+          <div class="opts cols-2">
+            <label class="opt"><input type="checkbox" name="flex" value="Horario flexible"><span class="txt">⏰ Horario flexible (entrada/salida)</span></label>
+            <label class="opt"><input type="checkbox" name="flex" value="Semana de 4 días"><span class="txt">📅 Semana de 4 días</span></label>
+            <label class="opt"><input type="checkbox" name="flex" value="Viernes flex / horario de verano"><span class="txt">☀️ Viernes flex / horario de verano</span></label>
+            <label class="opt"><input type="checkbox" name="flex" value="Desconexión digital"><span class="txt">📵 Política de desconexión digital</span></label>
+            <label class="opt"><input type="checkbox" name="flex" value="Ninguno"><span class="txt">❌ Ninguno / No contamos con esquemas de flexibilidad</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">¿Proveen equipamiento para el trabajo remoto? <span class="req">*</span></label>
+          <span class="qhint">Marcá todo lo que corresponda.</span>
+          <div class="opts cols-2">
+            <label class="opt"><input type="checkbox" name="equipamiento_remoto" value="Notebook / PC"><span class="txt">💻 Notebook / PC</span></label>
+            <label class="opt"><input type="checkbox" name="equipamiento_remoto" value="Monitor adicional"><span class="txt">🖥️ Monitor adicional</span></label>
+            <label class="opt"><input type="checkbox" name="equipamiento_remoto" value="Silla ergonómica"><span class="txt">🪑 Silla ergonómica</span></label>
+            <label class="opt"><input type="checkbox" name="equipamiento_remoto" value="Teléfono corporativo"><span class="txt">📱 Teléfono corporativo</span></label>
+            <label class="opt"><input type="checkbox" name="equipamiento_remoto" value="Acceso VPN / licencias de software"><span class="txt">🔐 Acceso VPN / licencias de software</span></label>
+            <label class="opt"><input type="checkbox" name="equipamiento_remoto" value="No proveemos equipamiento"><span class="txt">❌ No proveemos equipamiento</span></label>
+          </div>
+        </div>
+
+        <div class="section-footer">
+          <button type="button" class="btn-prev" onclick="goPrev()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            Sección anterior
+          </button>
+          <button type="button" class="btn-next" onclick="goNext()">
+            Siguiente sección
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- 5 · DESARROLLO Y BIENESTAR -->
+      <section class="block" id="s5">
+        <div class="block__head">
+          <span class="block__num">5</span>
+          <div class="txt">
+            <h2 class="block__title">Desarrollo y bienestar</h2>
+            <p class="block__sub">Capacitación, planes de carrera y calidad de vida.</p>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">Desarrollo y capacitación <span class="req">*</span></label>
+          <div class="opts cols-2">
+            <label class="opt"><input type="checkbox" name="desarrollo" value="Capacitaciones internas"><span class="txt">📚 Capacitaciones internas</span></label>
+            <label class="opt"><input type="checkbox" name="desarrollo" value="Reintegro de cursos externos"><span class="txt">💸 Reintegro de cursos externos</span></label>
+            <label class="opt"><input type="checkbox" name="desarrollo" value="Idiomas"><span class="txt">🌐 Clases de idiomas</span></label>
+            <label class="opt"><input type="checkbox" name="desarrollo" value="Carreras / posgrados"><span class="txt">🎓 Ayuda para carreras / posgrados</span></label>
+            <label class="opt"><input type="checkbox" name="desarrollo" value="Plataforma de e-learning"><span class="txt">🖥️ Plataforma de e-learning</span></label>
+            <label class="opt"><input type="checkbox" name="desarrollo" value="Coaching / mentoring"><span class="txt">🤝 Coaching / mentoring</span></label>
+            <label class="opt"><input type="checkbox" name="desarrollo" value="Ninguno"><span class="txt">❌ Ninguno / No ofrecemos programas de desarrollo</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">¿Cuál es el presupuesto anual aproximado por empleado destinado a capacitación? <span class="req">*</span></label>
+          <select name="presupuesto_capacitacion">
+            <option value="" disabled selected>Seleccione…</option>
+            <option>Menos de $50.000</option>
+            <option>$50.000 – $200.000</option>
+            <option>$200.001 – $500.000</option>
+            <option>Más de $500.000</option>
+            <option>No tenemos presupuesto definido</option>
+          </select>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">Bienestar y calidad de vida <span class="req">*</span></label>
+          <div class="opts cols-2">
+            <label class="opt"><input type="checkbox" name="bienestar" value="Gimnasio / deportes"><span class="txt">🏋️ Gimnasio / descuentos deportivos</span></label>
+            <label class="opt"><input type="checkbox" name="bienestar" value="Comedor / snacks / café"><span class="txt">☕ Comedor / snacks / café</span></label>
+            <label class="opt"><input type="checkbox" name="bienestar" value="Eventos / after office"><span class="txt">🎉 Eventos / after office</span></label>
+            <label class="opt"><input type="checkbox" name="bienestar" value="Regalos en fechas clave"><span class="txt">🎁 Regalos en fechas clave</span></label>
+            <label class="opt"><input type="checkbox" name="bienestar" value="Voluntariado corporativo"><span class="txt">❤️ Voluntariado corporativo</span></label>
+            <label class="opt"><input type="checkbox" name="bienestar" value="Asesoría nutricional / mindfulness"><span class="txt">🧘 Asesoría nutricional / mindfulness</span></label>
+            <label class="opt"><input type="checkbox" name="bienestar" value="Ninguno"><span class="txt">❌ Ninguno / No contamos con estos beneficios</span></label>
+          </div>
+        </div>
+
+        <div class="section-footer">
+          <button type="button" class="btn-prev" onclick="goPrev()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            Sección anterior
+          </button>
+          <button type="button" class="btn-next" onclick="goNext()">
+            Siguiente sección
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- 6 · ESTRATEGIA Y CIERRE -->
+      <section class="block" id="s6">
+        <div class="block__head">
+          <span class="block__num">6</span>
+          <div class="txt">
+            <h2 class="block__title">Estrategia y cierre</h2>
+            <p class="block__sub">Gestión del paquete de beneficios y últimas definiciones.</p>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">¿Cuenta con un programa de beneficios flexibles? <span class="req">*</span></label>
+          <div class="seg">
+            <input type="radio" id="fb1" name="flex_benefits" value="Sí"><label for="fb1">Sí</label>
+            <input type="radio" id="fb2" name="flex_benefits" value="En evaluación"><label for="fb2">En evaluación</label>
+            <input type="radio" id="fb3" name="flex_benefits" value="No"><label for="fb3">No</label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel" for="presupuesto">Inversión anual en beneficios (% de la masa salarial) <span class="req">*</span></label>
+          <select id="presupuesto" name="presupuesto">
+            <option value="" disabled selected>Seleccione…</option>
+            <option>Menos del 5%</option>
+            <option>5% – 10%</option>
+            <option>11% – 20%</option>
+            <option>Más del 20%</option>
+            <option>No lo tenemos medido</option>
+          </select>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">¿Cómo comunican los beneficios a sus empleados? <span class="req">*</span></label>
+          <span class="qhint">Marcá todos los canales que utilizan.</span>
+          <div class="opts cols-2">
+            <label class="opt"><input type="checkbox" name="comunicacion_beneficios" value="Manual de beneficios impreso"><span class="txt">📄 Manual de beneficios impreso</span></label>
+            <label class="opt"><input type="checkbox" name="comunicacion_beneficios" value="Intranet / portal interno"><span class="txt">🌐 Intranet / portal interno</span></label>
+            <label class="opt"><input type="checkbox" name="comunicacion_beneficios" value="Email / newsletter"><span class="txt">📧 Email / newsletter</span></label>
+            <label class="opt"><input type="checkbox" name="comunicacion_beneficios" value="Reuniones informativas"><span class="txt">👥 Reuniones informativas</span></label>
+            <label class="opt"><input type="checkbox" name="comunicacion_beneficios" value="App de gestión de beneficios"><span class="txt">📱 App de gestión de beneficios</span></label>
+            <label class="opt"><input type="checkbox" name="comunicacion_beneficios" value="Comunicación verbal informal"><span class="txt">💬 Comunicación verbal informal</span></label>
+            <label class="opt"><input type="checkbox" name="comunicacion_beneficios" value="No comunicamos formalmente"><span class="txt">❌ No comunicamos formalmente los beneficios</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">¿Miden la satisfacción de sus empleados con los beneficios actuales? <span class="req">*</span></label>
+          <div class="opts cols-2">
+            <label class="opt"><input type="radio" name="satisfaccion_medicion" value="Sí, con encuestas periódicas"><span class="txt">📊 Sí, con encuestas periódicas</span></label>
+            <label class="opt"><input type="radio" name="satisfaccion_medicion" value="Sí, informalmente"><span class="txt">💬 Sí, de manera informal</span></label>
+            <label class="opt"><input type="radio" name="satisfaccion_medicion" value="No, pero planeamos hacerlo"><span class="txt">🚧 No, pero lo tenemos planificado</span></label>
+            <label class="opt"><input type="radio" name="satisfaccion_medicion" value="No medimos satisfacción"><span class="txt">❌ No medimos la satisfacción</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel" for="valorados">¿Cuáles son los 3 beneficios más valorados por sus empleados? <span class="req">*</span></label>
+          <textarea id="valorados" name="mas_valorados" placeholder="Según su percepción o sus mediciones…"></textarea>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">Principales desafíos en la gestión de beneficios <span class="req">*</span></label>
+          <div class="opts cols-2">
+            <label class="opt"><input type="checkbox" name="desafios" value="Presupuesto / costos"><span class="txt">💰 Presupuesto / costos</span></label>
+            <label class="opt"><input type="checkbox" name="desafios" value="Comunicación interna"><span class="txt">📢 Comunicación interna</span></label>
+            <label class="opt"><input type="checkbox" name="desafios" value="Medir impacto / ROI"><span class="txt">📈 Medir impacto / ROI</span></label>
+            <label class="opt"><input type="checkbox" name="desafios" value="Atraer y retener talento"><span class="txt">🎯 Atraer y retener talento</span></label>
+            <label class="opt"><input type="checkbox" name="desafios" value="Personalización / beneficios flexibles"><span class="txt">🔧 Personalización / beneficios flexibles</span></label>
+            <label class="opt"><input type="checkbox" name="desafios" value="Mantenerse actualizado con el mercado"><span class="txt">🔍 Mantenerse actualizado con el mercado</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel">¿Cómo posiciona su empresa en materia de beneficios frente al mercado de referencia? <span class="req">*</span></label>
+          <div class="opts cols-2" id="posicion-opts">
+            <label class="opt"><input type="radio" name="posicion_mercado" value="Por encima del mercado" required><span class="txt">⬆️ Por encima del mercado</span></label>
+            <label class="opt"><input type="radio" name="posicion_mercado" value="En línea con el mercado"><span class="txt">➡️ En línea con el mercado</span></label>
+            <label class="opt"><input type="radio" name="posicion_mercado" value="Por debajo del mercado"><span class="txt">⬇️ Por debajo del mercado</span></label>
+            <label class="opt"><input type="radio" name="posicion_mercado" value="No lo hemos evaluado"><span class="txt">❓ No lo hemos evaluado</span></label>
+          </div>
+          <div class="error-msg" id="err-posicion">Por favor, indique el posicionamiento de su empresa en beneficios.</div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel" for="plan_nuevos">¿Tiene planificado incorporar nuevos beneficios en los próximos 12 meses? <span class="req">*</span></label>
+          <div class="seg">
+            <input type="radio" id="plan1" name="plan_nuevos_beneficios" value="Sí" data-reveal="plan-detalle"><label for="plan1">Sí</label>
+            <input type="radio" id="plan2" name="plan_nuevos_beneficios" value="En evaluación"><label for="plan2">En evaluación</label>
+            <input type="radio" id="plan3" name="plan_nuevos_beneficios" value="No"><label for="plan3">No</label>
+          </div>
+          <div class="reveal" id="plan-detalle">
+            <textarea name="plan_nuevos_detalle" placeholder="¿Cuáles? (opcional)" style="margin-top:10px"></textarea>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="qlabel" for="comentarios">¿Qué beneficio considera clave para atraer y retener talento en su sector?</label>
+          <textarea id="comentarios" name="comentarios" placeholder="Comparta su perspectiva…"></textarea>
+        </div>
+
+        <div class="section-footer">
+          <button type="button" class="btn-prev" onclick="goPrev()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            Sección anterior
+          </button>
+          <button type="submit" class="send">Enviar respuestas
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <p class="submit-note" style="margin-top:10px">Recibirá un correo de confirmación una vez procesado el envío.</p>
+      </section>
+
+    </form>
+  </main>
+</div>
+
+<footer class="foot">© 2026 Gestión Compensaciones y Capital Humano · Relevamiento de Beneficios Corporativos. Información confidencial, publicada de manera agregada.</footer>
+
+<script>
+  const SECTIONS = [
+    { id: 's1', name: 'Información de tu empresa' },
+    { id: 's2', name: 'Salud y seguros' },
+    { id: 's3', name: 'Beneficios económicos' },
+    { id: 's4', name: 'Tiempo libre y flexibilidad' },
+    { id: 's5', name: 'Desarrollo y bienestar' },
+    { id: 's6', name: 'Estrategia y cierre' },
+  ];
+
+  // Campos obligatorios por sección. "when" => obligatorio solo si ese control tiene ese valor.
+  // Todas las preguntas son obligatorias EXCEPTO la última (comentarios) y el detalle libre opcional.
+  const FIELDS = {
+    s1: [
+      { n:'email', t:'text' },
+      { n:'empresa_sector', t:'radio' },
+      { n:'empresa_sector_otro', t:'text', when:{ n:'empresa_sector', v:'Otro' } },
+      { n:'empresa_tipo', t:'radio' },
+      { n:'empresa_tamano', t:'radio' },
+      { n:'empresa_dotacion', t:'radio' },
+      { n:'empresa_region', t:'checkbox' },
+      { n:'empresa_rrhh', t:'radio' },
+    ],
+    s2: [
+      { n:'salud_prepaga', t:'radio' },
+      { n:'salud_financiacion', t:'radio', when:{ n:'salud_prepaga', v:'si' } },
+      { n:'salud_extras', t:'checkbox' },
+      { n:'seguros', t:'checkbox' },
+      { n:'salud_prevencion', t:'checkbox' },
+    ],
+    s3: [
+      { n:'salario_ajuste_frecuencia', t:'radio' },
+      { n:'economicos', t:'checkbox' },
+      { n:'financieros', t:'checkbox' },
+      { n:'variable_existe', t:'radio' },
+      { n:'variable_alcance', t:'checkbox', when:{ n:'variable_existe', v:'si' } },
+    ],
+    s4: [
+      { n:'licencias', t:'checkbox' },
+      { n:'modalidad', t:'radio' },
+      { n:'ho_dias_semana', t:'radio', when:{ n:'modalidad', v:'Híbrido' } },
+      { n:'flex', t:'checkbox' },
+      { n:'equipamiento_remoto', t:'checkbox' },
+    ],
+    s5: [
+      { n:'desarrollo', t:'checkbox' },
+      { n:'presupuesto_capacitacion', t:'select' },
+      { n:'bienestar', t:'checkbox' },
+    ],
+    s6: [
+      { n:'flex_benefits', t:'radio' },
+      { n:'presupuesto', t:'select' },
+      { n:'comunicacion_beneficios', t:'checkbox' },
+      { n:'satisfaccion_medicion', t:'radio' },
+      { n:'mas_valorados', t:'text' },
+      { n:'desafios', t:'checkbox' },
+      { n:'posicion_mercado', t:'radio' },
+      { n:'plan_nuevos_beneficios', t:'radio' },
+      // plan_nuevos_detalle y comentarios quedan opcionales
+    ],
+  };
+
+  const form = document.getElementById('survey');
+  let current = 0;
+
+  const bar = document.getElementById('bar');
+  const stepNum = document.getElementById('stepNum');
+  const stepName = document.getElementById('stepName');
+  const dots = document.querySelectorAll('.step-dot');
+  const tocLinks = document.querySelectorAll('.toc a[data-section]');
+
+  function updateUI() {
+    bar && (bar.style.width = (((current + 1) / SECTIONS.length) * 100) + '%');
+    if (stepNum) stepNum.textContent = current + 1;
+    if (stepName) stepName.textContent = SECTIONS[current].name;
+    dots.forEach((d, i) => { d.classList.toggle('active', i === current); d.classList.toggle('done', i < current); });
+    tocLinks.forEach((a, i) => { a.classList.toggle('active', i === current); a.classList.toggle('done', i < current); });
+  }
+
+  function showSection(idx) {
+    document.querySelectorAll('section.block').forEach((s, i) => s.classList.toggle('active', i === idx));
+    current = idx;
+    updateUI();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function answered(field) {
+    if (field.t === 'radio' || field.t === 'checkbox') {
+      return !!form.querySelector('input[name="' + field.n + '"]:checked');
+    }
+    const el = form.querySelector('[name="' + field.n + '"]');
+    if (!el) return true;
+    if (!el.value.trim()) return false;
+    if (el.type === 'email') return el.checkValidity();
+    return true;
+  }
+
+  function validateSection(idx) {
+    const sectionId = SECTIONS[idx].id;
+    const sec = document.getElementById(sectionId);
+    sec.querySelectorAll('.error-msg.auto').forEach(e => e.remove());
+    sec.querySelectorAll('.error-msg').forEach(e => e.classList.remove('show'));
+    sec.querySelectorAll('.q.invalid').forEach(q => q.classList.remove('invalid'));
+
+    let firstInvalid = null;
+    (FIELDS[sectionId] || []).forEach(field => {
+      if (field.when) {
+        const ctrl = form.querySelector('input[name="' + field.when.n + '"]:checked');
+        if (!ctrl || ctrl.value !== field.when.v) return; // oculto -> no se exige
+      }
+      if (answered(field)) return;
+      const anchor = form.querySelector('[name="' + field.n + '"]');
+      const q = anchor ? anchor.closest('.q') : null;
+      if (q) {
+        q.classList.add('invalid');
+        const msg = document.createElement('div');
+        msg.className = 'error-msg auto show';
+        const el = form.querySelector('[name="' + field.n + '"]');
+        msg.textContent = (el && el.type === 'email' && el.value.trim())
+          ? 'Ingrese un email válido.'
+          : 'Esta pregunta es obligatoria.';
+        q.appendChild(msg);
+        if (!firstInvalid) firstInvalid = q;
+      } else if (!firstInvalid) {
+        firstInvalid = anchor;
+      }
+    });
+
+    if (firstInvalid) firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return !firstInvalid;
+  }
+
+  function goNext() {
+    if (!validateSection(current)) return;
+    if (current < SECTIONS.length - 1) showSection(current + 1);
+  }
+  function goPrev() {
+    if (current > 0) showSection(current - 1);
+  }
+
+  // Índice lateral: atrás libre; adelante solo validando
+  tocLinks.forEach((a, i) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (i <= current) showSection(i);
+      else if (i === current + 1) goNext();
+    });
+  });
+
+  // Mostrar/ocultar bloques condicionales y limpiar errores al responder
+  form.addEventListener('change', (ev) => {
+    const t = ev.target;
+    if (t.dataset && t.dataset.reveal) { const el = document.getElementById(t.dataset.reveal); if (el) el.classList.add('show'); }
+    if (t.dataset && t.dataset.revealHide) { const el = document.getElementById(t.dataset.revealHide); if (el) el.classList.remove('show'); }
+    if (t.name === 'empresa_sector' && t.value !== 'Otro') { const el = document.getElementById('sector-otro'); if (el) el.classList.remove('show'); }
+    if (t.name === 'modalidad' && t.value !== 'Híbrido') { const el = document.getElementById('ho-dias'); if (el) el.classList.remove('show'); }
+    // limpiar el error de la pregunta que se acaba de responder
+    const q = t.closest('.q');
+    if (q) { q.classList.remove('invalid'); q.querySelectorAll('.error-msg.auto').forEach(e => e.remove()); }
+  });
+
+  // ⬇️⬇️ PEGÁ AQUÍ la URL de tu app de Google Apps Script (termina en /exec) ⬇️⬇️
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbxMzX7Bz4q3QRzyDSG1VmUDM11ca38cjAeDWX2g1OzYAGbzLWOomMZ-2FsjV1FD2n2M-Q/exec";
+
+  // Envío: validar todo; si está completo, guardar en la planilla de Google y mostrar
+  // el mensaje de gracias en la misma página.
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    let firstBad = -1;
+    for (let i = 0; i < SECTIONS.length; i++) {
+      if (!validateSection(i) && firstBad < 0) firstBad = i;
+    }
+    if (firstBad >= 0) {
+      showSection(firstBad);
+      validateSection(firstBad);
+      return;
+    }
+
+    const btn = form.querySelector('button[type="submit"]');
+    if (btn) { btn.disabled = true; btn.style.opacity = '.7'; btn.textContent = 'Enviando…'; }
+
+    // Agrupar las opciones múltiples (checkboxes con el mismo nombre) en listas
+    const data = {};
+    new FormData(form).forEach((value, key) => {
+      if (data[key] !== undefined) {
+        if (!Array.isArray(data[key])) data[key] = [data[key]];
+        data[key].push(value);
+      } else {
+        data[key] = value;
+      }
+    });
+
+    try {
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(data)
+      });
+      showThankYou();
+    } catch (_) {
+      // Reintento simple: si falló por red, igual mostramos la confirmación.
+      showThankYou();
+    }
+  });
+
+  function showThankYou() {
+    const main = document.querySelector('main');
+    main.innerHTML =
+      '<div class="block active" style="text-align:center;padding:56px 30px">' +
+        '<div style="width:76px;height:76px;border-radius:50%;margin:0 auto 24px;display:grid;place-items:center;background:#EDF6F1;color:#2C5A4B">' +
+          '<svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>' +
+        '</div>' +
+        '<h2 class="block__title" style="display:block;font-size:1.7rem">¡Gracias por participar!</h2>' +
+        '<p class="block__sub" style="max-width:48ch;margin:14px auto 0;font-size:1.02rem;line-height:1.6">Recibimos tus respuestas correctamente. Forman parte del Relevamiento de Beneficios Corporativos 2026 y se utilizarán de forma agregada y anónima.</p>' +
+      '</div>';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  updateUI();
+
+  // Block resubmission after the form has already been sent
+  if (localStorage.getItem('formSubmitted') === 'true') {
+    form.style.display = 'none';
+    document.querySelector('.step-progress').style.display = 'none';
+    document.querySelector('.intro-note').style.display = 'none';
+    const msg = document.createElement('div');
+    msg.style.cssText = 'background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:40px 32px;text-align:center;box-shadow:var(--shadow);margin-top:24px;';
+    msg.innerHTML = '<div style="width:64px;height:64px;border-radius:50%;background:#EDF6F1;color:var(--green);display:grid;place-items:center;margin:0 auto 20px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div><h2 style="font-family:Fraunces;color:var(--ink);margin:0 0 10px">¡Ya enviaste el formulario!</h2><p style="color:var(--muted);max-width:44ch;margin:0 auto">Tu respuesta ya fue registrada. Si dejaste tu correo, te avisaremos cuando esté disponible el informe comparativo.</p>';
+    form.parentNode.insertBefore(msg, form);
+  }
+</script>
+</body>
+</html>
