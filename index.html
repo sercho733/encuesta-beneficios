@@ -155,7 +155,7 @@
 
 <header class="masthead">
   <div class="masthead__inner">
-    <div class="brand"><span class="mark">C</span>Gestión Compensaciones y Capital Humano</div>
+    <div class="brand"><span class="mark">C</span>Gestión Capital Humano</div>
     <h1>Relevamiento de Beneficios Corporativos 2026</h1>
     <p class="lede">Estudio de mercado sobre las prácticas de beneficios y bienestar en empresas de la región. Sus respuestas alimentan un informe estratégico comparativo de acceso exclusivo para participantes.</p>
     <div class="meta-row">
@@ -185,7 +185,7 @@
       <span class="ico" aria-hidden="true">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       </span>
-      <div><strong>Confidencialidad.</strong> Los datos se usan solo con fines estadísticos y se publican de forma agregada y anónima. Todas las preguntas son obligatorias, salvo la última.</div>
+      <div><strong>Confidencialidad.</strong> Los datos se usan solo con fines estadísticos y se publican de forma agregada y anónima.</div>
     </div>
 
     <div class="step-progress">
@@ -659,8 +659,26 @@
         </div>
 
         <div class="q">
-          <label class="qlabel" for="valorados">¿Cuáles son los 3 beneficios más valorados por sus empleados? <span class="req">*</span></label>
-          <textarea id="valorados" name="mas_valorados" placeholder="Según su percepción o sus mediciones…"></textarea>
+          <label class="qlabel">¿Cuáles son los beneficios más valorados por sus empleados? <span class="req">*</span></label>
+          <span class="qhint">Seleccioná hasta 3 opciones, según su percepción o sus mediciones.</span>
+          <div class="opts cols-2" data-max="3">
+            <label class="opt"><input type="checkbox" name="mas_valorados" value="Cobertura médica / prepaga"><span class="txt">🏥 Cobertura médica / prepaga</span></label>
+            <label class="opt"><input type="checkbox" name="mas_valorados" value="Seguros (vida / accidentes)"><span class="txt">🛡️ Seguros (vida / accidentes)</span></label>
+            <label class="opt"><input type="checkbox" name="mas_valorados" value="Bonos / compensación variable"><span class="txt">💰 Bonos / compensación variable</span></label>
+            <label class="opt"><input type="checkbox" name="mas_valorados" value="Ajustes salariales frecuentes"><span class="txt">📈 Ajustes salariales frecuentes</span></label>
+            <label class="opt"><input type="checkbox" name="mas_valorados" value="Préstamos / beneficios financieros"><span class="txt">🏦 Préstamos / beneficios financieros</span></label>
+            <label class="opt"><input type="checkbox" name="mas_valorados" value="Descuentos en productos y servicios"><span class="txt">🏷️ Descuentos en productos y servicios</span></label>
+            <label class="opt"><input type="checkbox" name="mas_valorados" value="Comedor / vianda / tickets de alimentación"><span class="txt">🍽️ Comedor / vianda / alimentación</span></label>
+            <label class="opt"><input type="checkbox" name="mas_valorados" value="Home office / trabajo remoto"><span class="txt">🏡 Home office / trabajo remoto</span></label>
+            <label class="opt"><input type="checkbox" name="mas_valorados" value="Horario flexible"><span class="txt">⏰ Horario flexible</span></label>
+            <label class="opt"><input type="checkbox" name="mas_valorados" value="Días libres / vacaciones adicionales"><span class="txt">🌴 Días libres / vacaciones adicionales</span></label>
+            <label class="opt"><input type="checkbox" name="mas_valorados" value="Capacitación y formación"><span class="txt">📚 Capacitación y formación</span></label>
+            <label class="opt"><input type="checkbox" name="mas_valorados" value="Desarrollo de carrera"><span class="txt">🚀 Desarrollo de carrera</span></label>
+            <label class="opt"><input type="checkbox" name="mas_valorados" value="Bienestar / gimnasio / actividad física"><span class="txt">🧘 Bienestar / gimnasio</span></label>
+            <label class="opt"><input type="checkbox" name="mas_valorados" value="Salud mental / apoyo psicológico"><span class="txt">🧠 Salud mental / apoyo psicológico</span></label>
+            <label class="opt"><input type="checkbox" name="mas_valorados" value="Apoyo a la familia / guardería"><span class="txt">👨‍👩‍👧 Apoyo a la familia / guardería</span></label>
+            <label class="opt"><input type="checkbox" name="mas_valorados" value="Movilidad / transporte / estacionamiento"><span class="txt">🚗 Movilidad / transporte</span></label>
+          </div>
         </div>
 
         <div class="q">
@@ -694,13 +712,49 @@
             <input type="radio" id="plan3" name="plan_nuevos_beneficios" value="No"><label for="plan3">No</label>
           </div>
           <div class="reveal" id="plan-detalle">
-            <textarea name="plan_nuevos_detalle" placeholder="¿Cuáles? (opcional)" style="margin-top:10px"></textarea>
+            <label class="qlabel" style="margin-top:10px">¿Cuáles están evaluando incorporar?</label>
+            <span class="qhint">Marcá los que correspondan (opcional).</span>
+            <div class="opts cols-2">
+              <label class="opt"><input type="checkbox" name="plan_nuevos_detalle" value="Cobertura médica / prepaga"><span class="txt">🏥 Cobertura médica / prepaga</span></label>
+              <label class="opt"><input type="checkbox" name="plan_nuevos_detalle" value="Seguros (vida / accidentes)"><span class="txt">🛡️ Seguros (vida / accidentes)</span></label>
+              <label class="opt"><input type="checkbox" name="plan_nuevos_detalle" value="Bonos / compensación variable"><span class="txt">💰 Bonos / compensación variable</span></label>
+              <label class="opt"><input type="checkbox" name="plan_nuevos_detalle" value="Préstamos / beneficios financieros"><span class="txt">🏦 Préstamos / beneficios financieros</span></label>
+              <label class="opt"><input type="checkbox" name="plan_nuevos_detalle" value="Descuentos en productos y servicios"><span class="txt">🏷️ Descuentos en productos y servicios</span></label>
+              <label class="opt"><input type="checkbox" name="plan_nuevos_detalle" value="Comedor / vianda / tickets de alimentación"><span class="txt">🍽️ Comedor / vianda / alimentación</span></label>
+              <label class="opt"><input type="checkbox" name="plan_nuevos_detalle" value="Home office / trabajo remoto"><span class="txt">🏡 Home office / trabajo remoto</span></label>
+              <label class="opt"><input type="checkbox" name="plan_nuevos_detalle" value="Horario flexible"><span class="txt">⏰ Horario flexible</span></label>
+              <label class="opt"><input type="checkbox" name="plan_nuevos_detalle" value="Días libres / vacaciones adicionales"><span class="txt">🌴 Días libres / vacaciones adicionales</span></label>
+              <label class="opt"><input type="checkbox" name="plan_nuevos_detalle" value="Capacitación y formación"><span class="txt">📚 Capacitación y formación</span></label>
+              <label class="opt"><input type="checkbox" name="plan_nuevos_detalle" value="Desarrollo de carrera"><span class="txt">🚀 Desarrollo de carrera</span></label>
+              <label class="opt"><input type="checkbox" name="plan_nuevos_detalle" value="Bienestar / gimnasio / actividad física"><span class="txt">🧘 Bienestar / gimnasio</span></label>
+              <label class="opt"><input type="checkbox" name="plan_nuevos_detalle" value="Salud mental / apoyo psicológico"><span class="txt">🧠 Salud mental / apoyo psicológico</span></label>
+              <label class="opt"><input type="checkbox" name="plan_nuevos_detalle" value="Apoyo a la familia / guardería"><span class="txt">👨‍👩‍👧 Apoyo a la familia / guardería</span></label>
+              <label class="opt"><input type="checkbox" name="plan_nuevos_detalle" value="Movilidad / transporte / estacionamiento"><span class="txt">🚗 Movilidad / transporte</span></label>
+            </div>
           </div>
         </div>
 
         <div class="q">
-          <label class="qlabel" for="comentarios">¿Qué beneficio considera clave para atraer y retener talento en su sector?</label>
-          <textarea id="comentarios" name="comentarios" placeholder="Comparta su perspectiva…"></textarea>
+          <label class="qlabel">¿Qué beneficio considera clave para atraer y retener talento en su sector?</label>
+          <span class="qhint">Elegí la opción que considere más decisiva (opcional).</span>
+          <div class="opts cols-2">
+            <label class="opt"><input type="radio" name="comentarios" value="Cobertura médica / prepaga"><span class="txt">🏥 Cobertura médica / prepaga</span></label>
+            <label class="opt"><input type="radio" name="comentarios" value="Seguros (vida / accidentes)"><span class="txt">🛡️ Seguros (vida / accidentes)</span></label>
+            <label class="opt"><input type="radio" name="comentarios" value="Bonos / compensación variable"><span class="txt">💰 Bonos / compensación variable</span></label>
+            <label class="opt"><input type="radio" name="comentarios" value="Ajustes salariales frecuentes"><span class="txt">📈 Ajustes salariales frecuentes</span></label>
+            <label class="opt"><input type="radio" name="comentarios" value="Préstamos / beneficios financieros"><span class="txt">🏦 Préstamos / beneficios financieros</span></label>
+            <label class="opt"><input type="radio" name="comentarios" value="Descuentos en productos y servicios"><span class="txt">🏷️ Descuentos en productos y servicios</span></label>
+            <label class="opt"><input type="radio" name="comentarios" value="Comedor / vianda / tickets de alimentación"><span class="txt">🍽️ Comedor / vianda / alimentación</span></label>
+            <label class="opt"><input type="radio" name="comentarios" value="Home office / trabajo remoto"><span class="txt">🏡 Home office / trabajo remoto</span></label>
+            <label class="opt"><input type="radio" name="comentarios" value="Horario flexible"><span class="txt">⏰ Horario flexible</span></label>
+            <label class="opt"><input type="radio" name="comentarios" value="Días libres / vacaciones adicionales"><span class="txt">🌴 Días libres / vacaciones adicionales</span></label>
+            <label class="opt"><input type="radio" name="comentarios" value="Capacitación y formación"><span class="txt">📚 Capacitación y formación</span></label>
+            <label class="opt"><input type="radio" name="comentarios" value="Desarrollo de carrera"><span class="txt">🚀 Desarrollo de carrera</span></label>
+            <label class="opt"><input type="radio" name="comentarios" value="Bienestar / gimnasio / actividad física"><span class="txt">🧘 Bienestar / gimnasio</span></label>
+            <label class="opt"><input type="radio" name="comentarios" value="Salud mental / apoyo psicológico"><span class="txt">🧠 Salud mental / apoyo psicológico</span></label>
+            <label class="opt"><input type="radio" name="comentarios" value="Apoyo a la familia / guardería"><span class="txt">👨‍👩‍👧 Apoyo a la familia / guardería</span></label>
+            <label class="opt"><input type="radio" name="comentarios" value="Movilidad / transporte / estacionamiento"><span class="txt">🚗 Movilidad / transporte</span></label>
+          </div>
         </div>
 
         <div class="section-footer">
@@ -775,7 +829,7 @@
       { n:'presupuesto', t:'select' },
       { n:'comunicacion_beneficios', t:'checkbox' },
       { n:'satisfaccion_medicion', t:'radio' },
-      { n:'mas_valorados', t:'text' },
+      { n:'mas_valorados', t:'checkbox' },
       { n:'desafios', t:'checkbox' },
       { n:'posicion_mercado', t:'radio' },
       { n:'plan_nuevos_beneficios', t:'radio' },
@@ -873,6 +927,13 @@
   // Mostrar/ocultar bloques condicionales y limpiar errores al responder
   form.addEventListener('change', (ev) => {
     const t = ev.target;
+    // Limitar la selección de "beneficios más valorados" a un máximo de 3
+    if (t.name === 'mas_valorados') {
+      const group = form.querySelectorAll('input[name="mas_valorados"]');
+      const checked = form.querySelectorAll('input[name="mas_valorados"]:checked');
+      const reachedMax = checked.length >= 3;
+      group.forEach(c => { c.disabled = reachedMax && !c.checked; });
+    }
     if (t.dataset && t.dataset.reveal) { const el = document.getElementById(t.dataset.reveal); if (el) el.classList.add('show'); }
     if (t.dataset && t.dataset.revealHide) { const el = document.getElementById(t.dataset.revealHide); if (el) el.classList.remove('show'); }
     if (t.name === 'empresa_sector' && t.value !== 'Otro') { const el = document.getElementById('sector-otro'); if (el) el.classList.remove('show'); }
